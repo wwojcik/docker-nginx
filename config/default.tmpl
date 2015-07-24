@@ -1,7 +1,7 @@
 server {
     listen 80;
 
-    server_name localhost {{ .Env.DOMAINS }};
+#    server_name localhost {{ .Env.DOMAINS }};
     root /var/www/web;
 
     location / {
@@ -14,7 +14,7 @@ server {
     # In production, don't include this and don't deploy app_dev.php or config.php
     location ~ ^/(app_dev|config)\.php(/|$) {
         #fastcgi_keep_conn on;
-        fastcgi_pass {{ .Env.FASTCGI_PASS_ADDRESS_IP }}:{{ .Env.FASTCGI_PASS_ADDRESS_PORT }};
+        fastcgi_pass php:9000;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -24,7 +24,7 @@ server {
     # PROD
     location ~ ^/app\.php(/|$) {
         #fastcgi_keep_conn on;
-        fastcgi_pass {{ .Env.FASTCGI_PASS_ADDRESS_IP }}:{{ .Env.FASTCGI_PASS_ADDRESS_PORT }};
+        fastcgi_pass php:9000;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
