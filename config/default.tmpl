@@ -1,8 +1,6 @@
 server {
     listen 80;
-
-#    server_name localhost {{ .Env.DOMAINS }};
-    root /var/www/web;
+    root /app/web;
 
     location / {
         # try to serve file directly, fallback to app.php
