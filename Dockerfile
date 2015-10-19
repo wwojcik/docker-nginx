@@ -10,7 +10,7 @@ RUN apk --update add nginx \
     && rm -rf /tmp/dockerize.tar.gz /var/www/html /var/cache/apk/* \
     && mkdir -p /etc/nginx/sites-available/ /etc/nginx/sites-enabled/ \
     && echo "daemon off;" >> /etc/nginx/nginx.conf \
-    && chown -R www-data:www-data /var/lib/nginx
+    && chown -R nginx:www-data /var/lib/nginx
 
 COPY ./config/nginx.conf /etc/nginx/
 COPY ./config/default.tmpl /etc/nginx/sites-enabled/default
